@@ -19,31 +19,43 @@ A fully functional **MasterMind** game implemented in Java, featuring a graphica
   - Check guesses and receive immediate feedback
   - Game ends when the secret code is guessed or after maximum rounds
 
-## Conocimientos Técnicos y Tecnologías
+## Technical Knowledge and Technologies
 
-Para realizar esta migración se han aplicado los siguientes estándares y configuraciones:
+The following standards and configurations were applied to carry out this migration:
 
-- **Java 17:** Configuración explícita del compilador mediante la propiedad `<maven.compiler.release>` para asegurar compatibilidad moderna.
-- **Estructura Maven:** Reorganización del código fuente separando lógica de negocio (`src/main`) y pruebas (`src/test`).
-- **Gestión de Manifiesto:** Implementación del plugin `maven-jar-plugin` para definir la clase principal (`Main-Class`) en el `MANIFEST.MF`, permitiendo que el JAR sea ejecutable.
-- **Dependencias:** Gestión automatizada de librerías externas como JUnit para pruebas unitarias.
+- **Java 17:** Explicit compiler configuration using the `<maven.compiler.release>` property to ensure modern compatibility.
+- **Maven Structure:** Source code reorganization separating business logic (`src/main`) from tests (`src/test`).
+- **Manifest Management:** Implementation of the `maven-jar-plugin` to define the main class (`Main-Class`) in the `MANIFEST.MF`, allowing the JAR to be executable.
+- **Dependencies:** Automated management of external libraries such as JUnit for unit testing.
 
 ---
 
-## Estructura del Repositorio
+## Repository Structure
 
-El proyecto sigue la convención de directorios estándar de Maven:
+The project follows the standard Maven directory convention:
 
 ```text
 master-mind-maven/
 ├── src/
 │   ├── main/
 │   │   └── java/com/game/
-│   │       ├── Main.java            # Punto de entrada (Launcher)
-│   │       ├── MasterMindLogic.java # Lógica del juego
-│   │       └── MasterMindUI.java    # Interfaz Gráfica (Swing)
+│   │       ├── Main.java            # Entry point (Launcher)
+│   │       ├── MasterMindLogic.java # Game logic
+│   │       └── MasterMindUI.java    # Graphical User Interface (Swing)
 │   └── test/
 │       └── java/com/game/
-│           └── AppTest.java         # Pruebas Unitarias
-├── target/                          # Directorio de salida (generado)
-└── pom.xml                          # Configuración del proyecto
+│           └── AppTest.java         # Unit Tests
+├── target/                          # Output directory (generated)
+└── pom.xml                          # Project configuration
+
+## Build Instructions
+
+To generate the project executable, Maven must be installed. Run the following command in the root directory:
+
+```bash
+mvn clean package
+
+### This command will perform the following tasks:
+* Clean previous builds.
+* Compile the source code.
+* Run unit tests.
