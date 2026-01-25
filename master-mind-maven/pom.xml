@@ -1,12 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!--IDENTIDAD DEL PROYECTO-->
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.game</groupId>
-  <artifactId>master-mind-maven</artifactId>
+  <groupId>com.game</groupId> <!--dominio?¿-->
+  <artifactId>master-mind-maven</artifactId> <!--identificador unico de groupId-->
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>master-mind-maven</name>
   <url>http://maven.apache.org</url>
+
+  <!--PROPIEDADES DEL PROYECTO-->
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <!--DEPENDENCIAS DEL PROYECTO-->
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -15,4 +26,26 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <!--PLUGINS DEL PROYECTO-->
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>com.game.Main</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+
 </project>
