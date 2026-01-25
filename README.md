@@ -48,13 +48,16 @@ master-mind-maven/
 ├── target/                          # Output directory (generated)
 └── pom.xml                          # Project configuration
 
+```
+---
+
 ## Build Instructions
 
 To generate the project executable, Maven must be installed. Run the following command in the root directory:
 
 ```bash
 mvn clean package
-
+```
 ### This command will perform the following tasks:
 * Clean previous builds.
 * Compile the source code.
