@@ -1,12 +1,25 @@
-# 🎮 Proyecto MasterMind - Migración a Maven
+# MasterMind Game in Java
 
-Este repositorio contiene la implementación del juego de mesa **MasterMind** desarrollado en Java con Swing. Esta versión representa una refactorización y migración técnica del proyecto original para utilizar **Apache Maven** como gestor de construcción y dependencias.
+A fully functional **MasterMind** game implemented in Java, featuring a graphical user interface (GUI) with color selection, feedback pins, and multiple rounds. This project demonstrates Java Swing usage, object-oriented design, and game logic implementation.
 
-## 📋 Descripción del Proyecto
+---
 
-El objetivo de este trabajo ha sido modernizar un proyecto Java tradicional, estableciendo una arquitectura robusta y estandarizada. La migración a Maven permite automatizar la compilación, la gestión de librerías y la generación de ejecutables.
+## Features
 
-### 🛠 Conocimientos Técnicos y Tecnologías
+- **Graphical User Interface (GUI)** with Java Swing
+  - Interactive game board with rows for guesses
+  - Color selection panel
+  - Feedback pins (black and white) indicating correct and partially correct guesses
+- **Dynamic Game Logic**
+  - Randomly generated secret code using a customizable palette
+  - Accurate feedback system with black (correct position) and white (correct color, wrong position) pins
+  - Support for multiple rounds and configurable secret length
+- **User-Friendly**
+  - Select a color and fill the current row
+  - Check guesses and receive immediate feedback
+  - Game ends when the secret code is guessed or after maximum rounds
+
+## Conocimientos Técnicos y Tecnologías
 
 Para realizar esta migración se han aplicado los siguientes estándares y configuraciones:
 
@@ -17,7 +30,7 @@ Para realizar esta migración se han aplicado los siguientes estándares y confi
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 El proyecto sigue la convención de directorios estándar de Maven:
 
