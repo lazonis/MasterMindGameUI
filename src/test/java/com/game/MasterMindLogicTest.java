@@ -19,13 +19,13 @@ class MasterMindLogicTest {
     String[] labels = {"R", "V", "A", "M", "N", "L"};
     int secretLength = 4;
 
-    Color[] fixedSecret = {new Color(240, 17, 17),new Color(240, 17, 17), new Color(104, 227, 70),new Color(104, 227, 70)};
+    Color[] fixedSecret = {new Color(240, 17, 17), new Color(240, 17, 17), new Color(104, 227, 70), new Color(104, 227, 70)};
 
     /*TEST para la función generateSecret*/
     @Test
-    public void testGenerateSecret(){
+    public void testGenerateSecret() {
         //Given
-        MasterMindLogic game = new MasterMindLogic(palette,secretLength,labels);
+        MasterMindLogic game = new MasterMindLogic(palette, secretLength, labels);
 
         //When (llamamos al método original)
         Color[] secret = game.generateSecret(secretLength);
@@ -38,7 +38,7 @@ class MasterMindLogicTest {
                 "Longitud del Colores[] debe ser " + secretLength);
         //Comprueba que contiene colores de la paleta
         List<Color> listaPaleta = Arrays.asList(palette);
-        for (Color color : secret){
+        for (Color color : secret) {
             assertTrue(listaPaleta.contains(color),
                     "El secreto Colores[] generado tiene colores que no están en la paleta");
         }
@@ -47,47 +47,64 @@ class MasterMindLogicTest {
     /*TEST para la función checkGuess*/
     /*TODO ACIERTOS POSICIÓN + VALOR*/
     @Test
-    public void checkBlacks(){
+    public void testCheckBlacks() {
         //Given -> inicializamos el juego con la paleta
-            // y un secret fijo para comprobar la lógica matemática del checkGuess
-            MasterMindLogic game = new MasterMindLogic(palette,fixedSecret,labels);
+        // y un secret fijo para comprobar la lógica matemática del checkGuess
+        MasterMindLogic game = new MasterMindLogic(palette, fixedSecret, labels);
         //When
-            //el mismo que el definido arriba
-            Color [] userInput = {new Color(240, 17, 17),new Color(240, 17, 17), new Color(104, 227, 70),new Color(104, 227, 70)};
-            //Verifica la primera condición del if en checkGuess
-            MasterMindLogic.Result resultTest = game.checkGuess(userInput);
-        //Then
-            //este test comprueba que cuando todas coincidan, devuelva el resultado correcto
-            //así demuestra que la lógica de comprobación de negras funciona perfectamente
-            assertEquals(4, resultTest.blacks, "Resultado no puede ser diferente a 4 (todo aciertos)");
-            assertEquals(0, resultTest.whites, "No puede haber valores blancos");
-    }
-    /*TODOS LOS VALORES EXISTEN PERO NO COINCIDEN EN POSICIÓN*/
-    @Test
-    public void checkWhites(){
-        //Given
-            MasterMindLogic game = new MasterMindLogic(palette,fixedSecret,labels);
-        //When
-            //Mismos colores que fixedScreen pero orden invertido -> todas blancas
-            Color [] userInput = {new Color(104, 227, 70),new Color(104, 227, 70),new Color(240, 17, 17),new Color(240, 17, 17)};
-            //Verifica el funcionamiento del else en checkGuess
-            MasterMindLogic.Result resultTest = game.checkGuess(userInput);
-        //Then
-            assertEquals(0,resultTest.blacks, "No puede haber valores negros");
-            assertEquals(4,resultTest.whites, "Resultado no puede ser diferente a 4,todas son blancas");
-    }
-    /*NINGÚN ACIERTO NI EN VALOR NI EN POSICIÓN*/
-    @Test
-    public void noMatch(){
-        //Given
-        MasterMindLogic game = new MasterMindLogic(palette,fixedSecret,labels);
-        //When
-        Color [] userInput = {new Color(45, 64, 189), new Color(191, 83, 40),new Color(45, 64, 189), new Color(191, 83, 40)};
+        //el mismo que el definido arriba
+        Color[] userInput = {new Color(240, 17, 17), new Color(240, 17, 17), new Color(104, 227, 70), new Color(104, 227, 70)};
+        //Verifica la primera condición del if en checkGuess
         MasterMindLogic.Result resultTest = game.checkGuess(userInput);
         //Then
-        assertEquals(0,resultTest.blacks, "No puede haber valores negros");
-        assertEquals(0,resultTest.whites, "No puede haber valores blancos");
+        //este test comprueba que cuando todas coincidan, devuelva el resultado correcto
+        //así demuestra que la lógica de comprobación de negras funciona perfectamente
+        assertEquals(4, resultTest.blacks, "Resultado no puede ser diferente a 4 (todo aciertos)");
+        assertEquals(0, resultTest.whites, "No puede haber valores blancos");
+    }
+
+    /*TODOS LOS VALORES EXISTEN PERO NO COINCIDEN EN POSICIÓN*/
+    @Test
+    public void testCheckWhites() {
+        //Given
+        MasterMindLogic game = new MasterMindLogic(palette, fixedSecret, labels);
+        //When
+        //Mismos colores que fixedScreen pero orden invertido -> todas blancas
+        Color[] userInput = {new Color(104, 227, 70), new Color(104, 227, 70), new Color(240, 17, 17), new Color(240, 17, 17)};
+        //Verifica el funcionamiento del else en checkGuess
+        MasterMindLogic.Result resultTest = game.checkGuess(userInput);
+        //Then
+        assertEquals(0, resultTest.blacks, "No puede haber valores negros");
+        assertEquals(4, resultTest.whites, "Resultado no puede ser diferente a 4,todas son blancas");
+    }
+
+    /*NINGÚN ACIERTO NI EN VALOR NI EN POSICIÓN*/
+    @Test
+    public void testNoMatch() {
+        //Given
+        MasterMindLogic game = new MasterMindLogic(palette, fixedSecret, labels);
+        //When
+        Color[] userInput = {new Color(45, 64, 189), new Color(191, 83, 40), new Color(45, 64, 189), new Color(191, 83, 40)};
+        MasterMindLogic.Result resultTest = game.checkGuess(userInput);
+        //Then
+        assertEquals(0, resultTest.blacks, "No puede haber valores negros");
+        assertEquals(0, resultTest.whites, "No puede haber valores blancos");
     }
 
     /*TEST para la función checkGuess*/
+    @Test
+    public void testShowSecret() {
+        //Given
+        MasterMindLogic game = new MasterMindLogic(palette, fixedSecret, labels);
+        //When
+        String secret = game.showSecret();
+        //Then
+        assertEquals("RRVV", secret, "No coinciden las etiquetas (strings) con el secret");
+
+        //En el metodo original ShowSecret la linea del for se ve amarilla
+        //Es un coverage parcial porque al tener un break en ese condicional
+        //Nunca pasará por la condición del else
+    }
+
+
 }
