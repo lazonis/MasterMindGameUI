@@ -3,11 +3,42 @@ package com.game;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class MasterMindLogicTest {
+import static org.junit.jupiter.api.Assertions.*;
 
+
+class MasterMindLogicTest {
+    //Instanciamos la clase test con las variables de la clase a testear, compartidas para cada test
+    Color[] palette = {new Color(240, 17, 17), new Color(104, 227, 70), new Color(45, 64, 189), new Color(191, 83, 40), new Color(242, 135, 34), new Color(204, 94, 235)};
+    String[] labels = {"R", "V", "A", "M", "N", "L"};
+    int secretLength = 4;
+    /*Queremos:
+    * -> Que el secreto que genere sea un array valido de colores
+    *
+    * */
     @Test
     public void testGenerateSecret(){
+        //Given
+        MasterMindLogic game = new MasterMindLogic(palette,secretLength,labels);
+
+        //When (llamamos al método original)
+        Color[] secret = game.generateSecret(secretLength);
+
+        //Then
+        //Comprueba que no es nulo
+        assertNotNull(secret, "Resultado aleatorio de Colores[] no puede ser nulo");
+        //Comprueba que no tiene más longitud de la permitida
+        assertEquals(secretLength, secret.length,
+                "Longitud del Colores[] debe ser " + secretLength);
+        //Comprueba que contiene colores de la paleta
+        List<Color> listaPaleta = Arrays.asList(palette);
+        for (Color color : secret){
+            assertTrue(listaPaleta.contains(color),
+                    "El secreto Colores[] generado tiene colores que no están en la paleta");
+        }
 
     }
 
