@@ -1,1 +1,2 @@
-com\game\AppTest.class
+com\game\MasterMindUITest.class
+com\game\MasterMindLogicTest.class

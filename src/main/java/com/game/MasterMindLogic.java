@@ -47,7 +47,7 @@ public class MasterMindLogic {
         for (int i = 0; i < SECRET.length; i++) {
             Color g = guess[i];
             Color s = SECRET[i];
-            if (g == s) {
+            if (g.equals(s)) {
                 blacks++;
             } else {
                 guessSlots.add(g);
