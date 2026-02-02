@@ -42,4 +42,11 @@ class MasterMindLogicTest {
 
     }
 
+    public void checkBlacks(){}
+
+
+    public void checkWhiter(){}
+
+
+    public void noMatch(){}
 }

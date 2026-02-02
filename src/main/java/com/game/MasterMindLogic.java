@@ -11,11 +11,17 @@ public class MasterMindLogic {
     private final Color[] PALETTE;
     private final String[] LABELS;
 
-    // Constructor
+    // Constructor que usamos en la app
     public MasterMindLogic(Color[] palette, int secretLength, String[] labels) {
         this.PALETTE = palette;
         this.SECRET = generateSecret(secretLength);
         this.LABELS = labels;
+    }
+    //Constructor que utilizamos para evitar pasar por un random
+    public MasterMindLogic(Color[] palette, Color[] fixedSecret, String[] labels) {
+        this.PALETTE = palette;
+        this.LABELS = labels;
+        this.SECRET = fixedSecret;
     }
 
     // Secret generator
