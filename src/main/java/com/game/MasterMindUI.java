@@ -14,20 +14,23 @@ public class MasterMindUI {
     // Colors
     private static final Color BG_COLOR = new Color(141, 69, 220);
     private static final Color BASE_COLOR = new Color(187, 183, 172);
+
+    //Variable color donde guardamos el seleccionado
     private Color selectedColor = null;
     // Game logic
     private final MasterMindLogic LOGIC;
 
+    private JFrame frame;
+
     // Stores each row of guessed colors (4 circles per row)
-    private ArrayList<Circle[]> guessRows = new ArrayList<>();
-
+    ArrayList<Circle[]> guessRows = new ArrayList<>();
     // Stores each row of feedback pins (black/white pins for each guess)
-    private ArrayList<Circle[]> pinRows = new ArrayList<>();
+    ArrayList<Circle[]> pinRows = new ArrayList<>();
 
-    private int currentRow = 0;
+    int currentRow = 0;
 
     // Circle class for rounded objects
-    private static class Circle extends JButton {
+    static class Circle extends JButton {
         private Color color;
         private final int diameter;
 
@@ -140,18 +143,22 @@ public class MasterMindUI {
         return label;
     }
 
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
     private void colorPins(Circle[] pins, MasterMindLogic.Result result) {
         int blacks = result.blacks;
         int whites = result.whites;
 
         if (blacks == 4) {
-            JOptionPane.showMessageDialog(null, "You guessed it!");
+            showMessage("You guessed it!");
             return;
         } else {
-            JOptionPane.showMessageDialog(null, "Black: " + blacks + ". White: " + whites);
+            showMessage("Black: " + blacks + ". White: " + whites);
         }
         if (currentRow == 9) {
-            JOptionPane.showMessageDialog(null, "You lost, the answer was: " + LOGIC.showSecret());
+            showMessage("You lost, the answer was: " + LOGIC.showSecret());
         }
         for (int i = 0; i < 4; i++) {
             if (blacks > 0) {
@@ -177,34 +184,7 @@ public class MasterMindUI {
         controlPanel.setPreferredSize(new Dimension(200, 50));
 
         JButton checkBtn = createStyledButton("Check", BASE_COLOR, BUTTON_SIZE);
-        checkBtn.addActionListener(e -> {
-            Circle[] currentGuess = guessRows.get(currentRow);
-
-            // Check if any slot is still BASE_COLOR
-            boolean allFilled = true;
-            for (Circle slot : currentGuess) {
-                if (slot.getColor().equals(BASE_COLOR)) {
-                    allFilled = false;
-                    break;
-                }
-            }
-
-            if (allFilled) {
-                Circle[] current = guessRows.get(currentRow);
-                Color[] colorsRound = new Color[current.length];
-
-                for (int i = 0; i < current.length; i++) {
-                    colorsRound[i] = current[i].color;
-                }
-
-                colorPins(pinRows.get(currentRow), LOGIC.checkGuess(colorsRound));
-                // Move on to the next row
-                currentRow++;
-            } else {
-                // Show warning that row is incomplete
-                JOptionPane.showMessageDialog(null, "Please fill all slots before checking!");
-            }
-        });
+        checkBtn.addActionListener(e -> tryToCheck());
 
         JLabel selected = createColorDisplayLabel(BASE_COLOR, BUTTON_SIZE);
 
@@ -233,12 +213,46 @@ public class MasterMindUI {
         return bottomPanel;
     }
 
+
+    //Check logic
+
+    public void tryToCheck(){
+
+            Circle[] currentGuess = guessRows.get(currentRow);
+
+            // Check if any slot is still BASE_COLOR
+            boolean allFilled = true;
+            for (Circle slot : currentGuess) {
+                if (slot.getColor().equals(BASE_COLOR)) {
+                    allFilled = false;
+                    break;
+                }
+            }
+
+            if (allFilled) {
+                Circle[] current = guessRows.get(currentRow);
+                Color[] colorsRound = new Color[current.length];
+
+                for (int i = 0; i < current.length; i++) {
+                    colorsRound[i] = current[i].color;
+                }
+
+                colorPins(pinRows.get(currentRow), LOGIC.checkGuess(colorsRound));
+                // Move on to the next row
+                currentRow++;
+            } else {
+                // Show warning that row is incomplete
+                showMessage("Fill all slots before checking!");
+            }
+        }
+
+
     // Main UI
     public MasterMindUI(Color[] colors, String[] labels, int rounds, MasterMindLogic logic) {
         this.LOGIC = logic;
 
         // Main frame
-        JFrame frame = new JFrame("MasterMind");
+        this.frame = new JFrame("MasterMind");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         // Frame with rounds
@@ -254,6 +268,11 @@ public class MasterMindUI {
         frame.add(createBottomPanel(colors, labels), BorderLayout.SOUTH);
 
         frame.pack();
+        //frame.setVisible(true);
+    }
+
+
+    public void show(){
         frame.setVisible(true);
     }
 }
