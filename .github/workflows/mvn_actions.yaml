@@ -1,7 +1,7 @@
 name: Testing and dependencies integration
 on:
   push:
-    branches:[ release/maven-and-testing ]
+    branches: [ release/maven-and-testing ]
 jobs:
   build:
     runs-on: ubuntu-latest
