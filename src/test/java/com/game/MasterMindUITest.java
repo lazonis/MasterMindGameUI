@@ -13,21 +13,23 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static java.awt.SystemColor.text;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MasterMindUITest {
 
+    /**Simulación de MasterMindLogic vacío por dentro
+    Lo utilizamos para comprobar que la UI llama a la logica de esta clase**/
     @Mock
     MasterMindLogic mockLogic;
-
+    /**Instancia real de una clase, que nos permite acceder a variables necesarias para el testing
+     * y a la vez nos permite sobreescribir y controlar métodos**/
     @Spy
     MasterMindUI spyMasterMindUI;
 
-    //
+
     Color[] palette = {
             new Color(240, 17, 17),
             new Color(104, 227, 70),
@@ -126,5 +128,13 @@ public class MasterMindUITest {
         spyMasterMindUI.frame.dispose();
     }
 
+    /**TEST de inicialización de variables **/
+    @Test
+    void testInitialicedFields(){
+        MasterMindUI masterMindUI = new MasterMindUI(palette,labels,10,mockLogic);
+
+        assertNotNull(masterMindUI.frame);
+        assertSame(mockLogic, masterMindUI.LOGIC);
+    }
 
 }

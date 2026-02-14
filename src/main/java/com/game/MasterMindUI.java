@@ -18,7 +18,7 @@ public class MasterMindUI {
     //Variable color donde guardamos el seleccionado
     private Color selectedColor = null;
     // Game logic
-    private MasterMindLogic LOGIC;
+    protected MasterMindLogic LOGIC;
 
     protected JFrame frame;
 
