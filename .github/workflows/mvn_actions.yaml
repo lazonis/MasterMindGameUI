@@ -17,4 +17,4 @@ jobs:
         cache: 'maven'
 
     - name: Maven test
-      run: mvn test --file pom.xml
+      run: xvfb-run --auto-servernum mvn test --file pom.xml
