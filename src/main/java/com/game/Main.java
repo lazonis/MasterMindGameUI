@@ -25,7 +25,7 @@ public class Main {
 
         // Create UI
         SwingUtilities.invokeLater(() -> {
-            new MasterMindUI(palette, labels, rounds, logic).show();
+            new MasterMindUI(palette, labels, rounds, logic).showFrame();
         });
     }
 }

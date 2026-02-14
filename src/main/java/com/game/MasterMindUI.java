@@ -20,7 +20,7 @@ public class MasterMindUI {
     // Game logic
     private MasterMindLogic LOGIC;
 
-    private JFrame frame;
+    protected JFrame frame;
 
     // Stores each row of guessed colors (4 circles per row)
     ArrayList<Circle[]> guessRows = new ArrayList<>();
@@ -271,7 +271,7 @@ public class MasterMindUI {
 
     public MasterMindUI() {}
 
-    public void show() {
+    public void showFrame() {
         frame.setVisible(true);
     }
 }
